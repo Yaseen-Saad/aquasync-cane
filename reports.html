@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treatment Reports - AquaSync Cane</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="reports-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <img src="sugarcane-icon.png" alt="AquaSync Cane Logo" class="logo-img">
+            <span>AquaSync Cane</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+            <li><a href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a></li>
+            <li><a href="reports.html" class="active"><i class="fas fa-chart-line"></i> Reports</a></li>
+            <li><a href="plant-monitoring.html"><i class="fas fa-seedling"></i> Plant Monitoring</a></li>
+            <li><a href="manual.html"><i class="fas fa-book"></i> Manual</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <h1>Treatment Reports</h1>
+            <p class="subtitle">Comprehensive Analysis and Performance Metrics</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="reports-container">
+            <!-- Date Range Selector -->
+            <section class="date-range-section">
+                <div class="section-header">
+                    <h2>Report Period</h2>
+                    <div class="date-controls">
+                        <button class="btn btn-secondary" onclick="refreshData()">
+                            <i class="fas fa-sync-alt"></i> Refresh Data
+                        </button>
+                        <button class="btn btn-primary" onclick="exportReport()">
+                            <i class="fas fa-download"></i> Export Report
+                        </button>
+                    </div>
+                </div>
+                <div class="date-range-picker">
+                    <div class="date-input">
+                        <label for="start-date">Start Date</label>
+                        <input type="date" id="start-date" value="2024-03-01">
+                    </div>
+                    <div class="date-input">
+                        <label for="end-date">End Date</label>
+                        <input type="date" id="end-date" value="2024-03-15">
+                    </div>
+                    <button class="btn btn-primary" onclick="updateDateRange()">
+                        <i class="fas fa-calendar-check"></i> Apply Date Range
+                    </button>
+                </div>
+            </section>
+
+            <!-- Performance Analysis -->
+            <section class="performance-analysis">
+                <div class="section-header">
+                    <h2>Performance Analysis</h2>
+                    <button class="btn btn-secondary" onclick="showHelp('performance')">
+                        <i class="fas fa-question-circle"></i> Help
+                    </button>
+                </div>
+                <div class="analysis-grid">
+                    <div class="analysis-card">
+                        <h3>Treatment Efficiency</h3>
+                        <canvas id="efficiencyChart"></canvas>
+                    </div>
+                    <div class="analysis-card">
+                        <h3>Resource Consumption</h3>
+                        <canvas id="consumptionChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Plant Monitoring -->
+            <section class="plant-monitoring">
+                <div class="section-header">
+                    <h2>Plant Monitoring</h2>
+                    <button class="btn btn-secondary" onclick="refreshPlantData()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+                <div class="monitoring-grid">
+                    <div class="monitoring-card">
+                        <div class="card-header">
+                            <i class="fas fa-tint"></i>
+                            <h3>Soil Moisture</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="metric-value">65%</div>
+                            <div class="metric-status good">Optimal</div>
+                        </div>
+                        <canvas id="moistureChart"></canvas>
+                    </div>
+                    <div class="monitoring-card">
+                        <div class="card-header">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Growth Metrics</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="metric-value">2.3 cm/day</div>
+                            <div class="metric-status good">Normal</div>
+                        </div>
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Comparison Analysis -->
+            <section class="comparison-analysis">
+                <div class="section-header">
+                    <h2>Comparison Analysis</h2>
+                    <button class="btn btn-secondary" onclick="showHelp('comparison')">
+                        <i class="fas fa-question-circle"></i> Help
+                    </button>
+                </div>
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h3>Treatment Comparison</h3>
+                        <canvas id="treatmentChart"></canvas>
+                    </div>
+                    <div class="comparison-card">
+                        <h3>Quality Parameters</h3>
+                        <canvas id="qualityChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detailed Reports -->
+            <section class="detailed-reports">
+                <div class="section-header">
+                    <h2>Detailed Reports</h2>
+                    <button class="btn btn-secondary" onclick="exportDetailedReport()">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Before Treatment</th>
+                                <th>After Treatment</th>
+                                <th>Efficiency</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>BOD</td>
+                                <td>1200 mg/L</td>
+                                <td>96 mg/L</td>
+                                <td>92%</td>
+                                <td><span class="status-badge success">Good</span></td>
+                            </tr>
+                            <tr>
+                                <td>COD</td>
+                                <td>2500 mg/L</td>
+                                <td>300 mg/L</td>
+                                <td>88%</td>
+                                <td><span class="status-badge success">Good</span></td>
+                            </tr>
+                            <tr>
+                                <td>TSS</td>
+                                <td>800 mg/L</td>
+                                <td>40 mg/L</td>
+                                <td>95%</td>
+                                <td><span class="status-badge success">Good</span></td>
+                            </tr>
+                            <tr>
+                                <td>pH</td>
+                                <td>6.2</td>
+                                <td>7.2</td>
+                                <td>100%</td>
+                                <td><span class="status-badge success">Good</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Reports Help</h2>
+            <div id="helpContent"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="reports.js"></script>
+</body>
+</html> 

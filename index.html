@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaSync Cane - Live Reading</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: #eef7f8;
+        }
+        .container-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            width: 100vw;
+            margin: 0;
+            padding-top: 60px;
+        }
+        .results-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: .06em;
+            color: #045b6a;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .reading-card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 16px 2px rgba(60, 60, 60, 0.09);
+            padding: 36px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            min-width: 320px;
+            max-width: 430px;
+            width: 100%;
+            align-items: center;
+            margin-bottom: 18px;
+            position: relative;
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .rc-timestamp {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #04a6a6;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .rc-row {
+            width: 100%;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            justify-content: space-between;
+            border-bottom: 1px solid #f2f2f2;
+            padding-bottom: 8px;
+            margin-bottom: 4px;
+        }
+        .rc-label {
+            font-size: 1.1rem;
+            color: #4e6e79;
+            font-weight: 500;
+            flex: 1 1 120px;
+            text-align: left;
+        }
+        .rc-value {
+            font-size: 1.23rem;
+            font-weight: 700;
+            color: #222;
+            text-align: right;
+            flex: 0 0 88px;
+        }
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #0cb18a;
+            display: inline-block;
+            margin-right: 7px;
+        }
+        @media (max-width: 600px) {
+            .results-title { font-size: 1.2rem; }
+            .reading-card { min-width: unset; padding: 14px 5vw; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <img src="sugarcane-icon.png" alt="AquaSync Cane Logo" class="logo-img">
+            <span>AquaSync Cane</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+            <li><a href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a></li>
+            <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+            <li><a href="plant-monitoring.html"><i class="fas fa-seedling"></i> Plant Monitoring</a></li>
+            <li><a href="manual.html"><i class="fas fa-book"></i> Manual</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </nav>
+    <div class="container-center">
+        <div class="results-title">Live Reading</div>
+        <div id="liveReadingCard"></div>
+    </div>
+    <script>
+    // Mapping for display (label, source keys, icon class)
+    const KEY_MAPS = [
+        { label: "Timestamp", keys: ["timestamp", "Timestamp", "Time", "time"], icon: "fa-clock" },
+        { label: "TDS", keys: ["TDS", "tds"], icon: "fa-water" },
+        { label: "pH", keys: ["pH", "PH", "ph"], icon: "fa-flask" },
+        { label: "Turbidity", keys: ["Turbidity", "turbidity"], icon: "fa-bong" },
+        { label: "Power", keys: ["Power", "power"], icon: "fa-bolt" },
+        { label: "Cycle", keys: ["Cycle", "cycle"], icon: "fa-sync-alt" }
+    ];
+    let readings = [];
+    let idx = 0, intervalId = null;
+
+    async function fetchReadings() {
+        try {
+            const resp = await fetch('results.json', {cache:"reload"});
+            if (!resp.ok) throw new Error("Failed to fetch results.json");
+            readings = await resp.json();
+            if (!Array.isArray(readings) || readings.length === 0) {
+                showError("No readings found in results.json.");
+                return;
+            }
+            idx = 0;
+            renderLiveCard();
+            if (intervalId) clearInterval(intervalId);
+            intervalId = setInterval(() => {
+                idx = (idx + 1) % readings.length;
+                renderLiveCard();
+            }, 1000);
+        } catch (e) {
+            showError("Unable to load JSON: " + e.message);
+        }
+    }
+
+    // Render only one reading at a time based on idx
+    function renderLiveCard() {
+        const reading = readings[idx];
+        if (!reading) {
+            document.getElementById('liveReadingCard').innerHTML = "";
+            return;
+        }
+        let html = `<div class='reading-card'>`;
+        // Timestamp on top
+        const timestamp = getFirstNonEmpty(reading, KEY_MAPS[0].keys);
+        html += `<div class="rc-timestamp"><span class="status-dot"></span><i class="fas ${KEY_MAPS[0].icon}"></i> ${timestamp ? timestamp : "n/a"}</div>`;
+        // Each parameter (skip timestamp shown above)
+        for (let j=1; j<KEY_MAPS.length; ++j) {
+            const map = KEY_MAPS[j];
+            const value = getFirstNonEmpty(reading, map.keys);
+            if (typeof value !== "undefined" && value !== null && value !== "") {
+                html += `
+                <div class="rc-row">
+                    <span class="rc-label"><i class="fas ${map.icon}"></i> ${map.label}:</span>
+                    <span class="rc-value">${value}</span>
+                </div>`;
+            }
+        }
+        html += "</div>";
+        document.getElementById('liveReadingCard').innerHTML = html;
+    }
+
+    function showError(msg) {
+        document.getElementById('liveReadingCard').innerHTML = `<p style="color:#c00;font-size:17px">${msg}</p>`;
+    }
+    function getFirstNonEmpty(obj, keyArr) {
+        for (const k of keyArr) {
+            if (obj.hasOwnProperty(k) && obj[k] !== "" && typeof obj[k] !== "undefined") return obj[k];
+        }
+        return null;
+    }
+
+    // Start fetching on load
+    fetchReadings();
+    </script>
+</body>
+</html>

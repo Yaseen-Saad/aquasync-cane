@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Manual - AquaSync Cane</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="manual-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <img src="sugarcane-icon.png" alt="AquaSync Cane Logo" class="logo-img">
+            <span>AquaSync Cane</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+            <li><a href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a></li>
+            <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+            <li><a href="manual.html" class="active"><i class="fas fa-book"></i> Manual</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </nav>
+    
+    <header>
+        <div class="header-content">
+            <h1>User Manual</h1>
+            <p class="subtitle">Comprehensive guide for using the AquaSync Cane system</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="manual-container">
+            <!-- Table of Contents -->
+            <aside class="sidebar">
+                <div class="search-box">
+                    <input type="text" placeholder="Search manual..." title="Search the manual">
+                    <i class="fas fa-search"></i>
+                </div>
+                <nav class="toc">
+                    <ul>
+                        <li>
+                            <a href="#introduction" class="active">
+                                <i class="fas fa-info-circle"></i>
+                                Introduction
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#getting-started">
+                                <i class="fas fa-rocket"></i>
+                                Getting Started
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#dashboard">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#monitoring">
+                                <i class="fas fa-chart-line"></i>
+                                Monitoring
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#maintenance">
+                                <i class="fas fa-tools"></i>
+                                Maintenance
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#reports">
+                                <i class="fas fa-file-alt"></i>
+                                Reports
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#troubleshooting">
+                                <i class="fas fa-wrench"></i>
+                                Troubleshooting
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#faq">
+                                <i class="fas fa-question-circle"></i>
+                                FAQ
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="content">
+                <!-- Introduction -->
+                <section id="introduction" class="section">
+                    <h2>Introduction</h2>
+                    <div class="section-content">
+                        <p>Welcome to the AquaSync Cane user manual. This guide will help you understand and use the system effectively.</p>
+                        <div class="info-box">
+                            <h3>What is AquaSync Cane?</h3>
+                            <p>An integrated system for monitoring and managing wastewater treatment in sugarcane factories. The system provides smart solutions to improve treatment efficiency and reduce costs.</p>
+                        </div>
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <i class="fas fa-chart-line"></i>
+                                <h4>Real-time Monitoring</h4>
+                                <p>Track all treatment parameters in real-time</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-robot"></i>
+                                <h4>Automated Control</h4>
+                                <p>Smart control system that operates automatically</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-file-alt"></i>
+                                <h4>Comprehensive Reports</h4>
+                                <p>Detailed reports on performance and costs</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-bell"></i>
+                                <h4>Smart Alerts</h4>
+                                <p>Instant notifications when issues occur</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Getting Started -->
+                <section id="getting-started" class="section">
+                    <h2>Getting Started</h2>
+                    <div class="section-content">
+                        <div class="steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h3>Login</h3>
+                                    <p>Log in using your credentials</p>
+                                    <div class="code-block">
+                                        <code>Username: admin</code>
+                                        <code>Password: ********</code>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h3>System Setup</h3>
+                                    <p>Configure basic system settings</p>
+                                    <ul class="checklist">
+                                        <li>Add users</li>
+                                        <li>Set permissions</li>
+                                        <li>Configure alerts</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h3>Start Monitoring</h3>
+                                    <p>Begin monitoring treatment processes</p>
+                                    <div class="video-container">
+                                        <video controls>
+                                            <source src="tutorial.mp4" type="video/mp4">
+                                            Your browser does not support the video tag
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dashboard -->
+                <section id="dashboard" class="section">
+                    <h2>Dashboard</h2>
+                    <div class="section-content">
+                        <div class="dashboard-overview">
+                            <img src="dashboard-preview.png" alt="Dashboard Preview" class="dashboard-preview">
+                            <div class="dashboard-features">
+                                <h3>Dashboard Features</h3>
+                                <ul>
+                                    <li>View real-time system status</li>
+                                    <li>Monitor treatment parameters</li>
+                                    <li>Control processes</li>
+                                    <li>View alerts and notifications</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Monitoring -->
+                <section id="monitoring" class="section">
+                    <h2>Monitoring</h2>
+                    <div class="section-content">
+                        <div class="monitoring-grid">
+                            <div class="monitoring-card">
+                                <h3>Parameter Monitoring</h3>
+                                <ul>
+                                    <li>pH Level</li>
+                                    <li>Total Suspended Solids (TSS)</li>
+                                    <li>Chemical Oxygen Demand (COD)</li>
+                                    <li>Biological Oxygen Demand (BOD)</li>
+                                </ul>
+                            </div>
+                            <div class="monitoring-card">
+                                <h3>Process Control</h3>
+                                <ul>
+                                    <li>Adjust chemical dosages</li>
+                                    <li>Control flow rates</li>
+                                    <li>Manage operation times</li>
+                                    <li>Monitor energy consumption</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Maintenance -->
+                <section id="maintenance" class="section">
+                    <h2>Maintenance</h2>
+                    <div class="section-content">
+                        <div class="maintenance-schedule">
+                            <h3>Maintenance Schedule</h3>
+                            <table class="schedule-table">
+                                <thead>
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Frequency</th>
+                                        <th>Responsible</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Pump Inspection</td>
+                                        <td>Daily</td>
+                                        <td>Maintenance Technician</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Filter Cleaning</td>
+                                        <td>Weekly</td>
+                                        <td>Maintenance Technician</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Device Calibration</td>
+                                        <td>Monthly</td>
+                                        <td>Maintenance Engineer</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reports -->
+                <section id="reports" class="section">
+                    <h2>Reports</h2>
+                    <div class="section-content">
+                        <div class="reports-types">
+                            <div class="report-type">
+                                <h3>Performance Reports</h3>
+                                <ul>
+                                    <li>Treatment Efficiency</li>
+                                    <li>Energy Consumption</li>
+                                    <li>Water Quality</li>
+                                    <li>Operating Costs</li>
+                                </ul>
+                            </div>
+                            <div class="report-type">
+                                <h3>Maintenance Reports</h3>
+                                <ul>
+                                    <li>Maintenance Log</li>
+                                    <li>Maintenance Costs</li>
+                                    <li>Downtime</li>
+                                    <li>Spare Parts Inventory</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Troubleshooting -->
+                <section id="troubleshooting" class="section">
+                    <h2>Troubleshooting</h2>
+                    <div class="section-content">
+                        <div class="troubleshooting-grid">
+                            <div class="issue-card">
+                                <h3>pH Level Issues</h3>
+                                <p>If pH level is outside the required range:</p>
+                                <ol>
+                                    <li>Check chemical dosages</li>
+                                    <li>Inspect pH sensors</li>
+                                    <li>Recalibrate devices</li>
+                                </ol>
+                            </div>
+                            <div class="issue-card">
+                                <h3>Pressure Issues</h3>
+                                <p>If there is a pressure drop:</p>
+                                <ol>
+                                    <li>Check pumps</li>
+                                    <li>Look for blockages</li>
+                                    <li>Inspect control valves</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FAQ -->
+                <section id="faq" class="section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="section-content">
+                        <div class="faq-list">
+                            <div class="faq-item">
+                                <h3>How do I add a new user?</h3>
+                                <p>You can add a new user through Settings > User Management > Add New User.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3>How do I export reports?</h3>
+                                <p>You can export reports in different formats (PDF, Excel) through Reports > Export.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h3>How do I set up alerts?</h3>
+                                <p>You can configure alerts through Settings > Alert Settings.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="manual.js"></script>
+</body>
+</html> 

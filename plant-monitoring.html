@@ -1,0 +1,194 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Monitoring - AquaSync Cane</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="plant-monitoring-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <img src="sugarcane-icon.png" alt="AquaSync Cane Logo" class="logo-img">
+            <span>AquaSync Cane</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+            <li><a href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a></li>
+            <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+            <li><a href="plant-monitoring.html" class="active"><i class="fas fa-seedling"></i> Plant Monitoring</a></li>
+            <li><a href="manual.html"><i class="fas fa-book"></i> Manual</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <h1>Wastewater Treatment Monitoring</h1>
+            <p class="subtitle">Sugar Industry Wastewater Treatment and Irrigation Control</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="dashboard-grid">
+            <!-- Treatment Parameters -->
+            <section class="treatment-parameters">
+                <div class="section-header">
+                    <h2>Treatment Parameters</h2>
+                    <button class="help-btn" onclick="showHelp('treatment')" title="Learn about treatment parameters">
+                        <i class="fas fa-question-circle"></i>
+                    </button>
+                </div>
+                <div class="parameters-grid">
+                    <div class="parameter-card">
+                        <h3>BOD Removal</h3>
+                        <div class="parameter-value">
+                            <span id="bod-removal">92</span>%
+                        </div>
+                        <div class="parameter-status optimal">Optimal</div>
+                    </div>
+                    <div class="parameter-card">
+                        <h3>COD Removal</h3>
+                        <div class="parameter-value">
+                            <span id="cod-removal">88</span>%
+                        </div>
+                        <div class="parameter-status optimal">Optimal</div>
+                    </div>
+                    <div class="parameter-card">
+                        <h3>TSS Removal</h3>
+                        <div class="parameter-value">
+                            <span id="tss-removal">95</span>%
+                        </div>
+                        <div class="parameter-status optimal">Optimal</div>
+                    </div>
+                    <div class="parameter-card">
+                        <h3>TDS Level</h3>
+                        <div class="parameter-value">
+                            <span id="tds-level">2500</span> mg/L
+                        </div>
+                        <div class="parameter-status warning">Monitor</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Water Level & Soil Humidity -->
+            <section class="monitoring-section">
+                <div class="section-header">
+                    <h2>Water & Soil Monitoring</h2>
+                    <div class="monitoring-controls">
+                        <button class="btn btn-primary" onclick="refreshMonitoringData()">
+                            <i class="fas fa-sync"></i> Refresh Data
+                        </button>
+                    </div>
+                </div>
+                <div class="monitoring-grid">
+                    <div class="monitoring-card">
+                        <div class="monitoring-header">
+                            <h3>Water Level</h3>
+                            <span class="monitoring-status optimal">Normal</span>
+                        </div>
+                        <div class="monitoring-details">
+                            <div class="detail-item">
+                                <i class="fas fa-water"></i>
+                                <span>Level: <span id="water-level">2.5</span> m</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Last Updated: <span id="water-update">2 min ago</span></span>
+                            </div>
+                        </div>
+                        <div class="monitoring-actions">
+                            <button class="btn btn-secondary" onclick="adjustWaterLevel()">
+                                Adjust Level
+                            </button>
+                        </div>
+                    </div>
+                    <div class="monitoring-card">
+                        <div class="monitoring-header">
+                            <h3>Soil Humidity</h3>
+                            <span class="monitoring-status optimal">Optimal</span>
+                        </div>
+                        <div class="monitoring-details">
+                            <div class="detail-item">
+                                <i class="fas fa-tint"></i>
+                                <span>Humidity: <span id="soil-humidity">65</span>%</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Last Updated: <span id="humidity-update">1 min ago</span></span>
+                            </div>
+                        </div>
+                        <div class="monitoring-actions">
+                            <button class="btn btn-secondary" onclick="adjustIrrigation()">
+                                Adjust Irrigation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics -->
+            <section class="treatment-analytics">
+                <div class="section-header">
+                    <h2>Treatment Analytics</h2>
+                </div>
+                <div class="chart-row">
+                    <div class="chart-container">
+                        <h3>Parameter Trends</h3>
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Treatment Efficiency</h3>
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Environmental Conditions -->
+            <section class="environmental-info">
+                <div class="section-header">
+                    <h2>Environmental Conditions</h2>
+                </div>
+                <div class="environmental-grid">
+                    <div class="environmental-card">
+                        <i class="fas fa-temperature-high"></i>
+                        <h3>Temperature</h3>
+                        <div class="environmental-value" id="current-temp">28°C</div>
+                    </div>
+                    <div class="environmental-card">
+                        <i class="fas fa-tint"></i>
+                        <h3>pH Level</h3>
+                        <div class="environmental-value" id="ph-level">7.2</div>
+                    </div>
+                    <div class="environmental-card">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Conductivity</h3>
+                        <div class="environmental-value" id="conductivity">800 µS/cm</div>
+                    </div>
+                    <div class="environmental-card">
+                        <i class="fas fa-wind"></i>
+                        <h3>Dissolved Oxygen</h3>
+                        <div class="environmental-value" id="dissolved-oxygen">6.5 mg/L</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Help Guide</h2>
+            <div id="helpContent"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="plant-monitoring.js"></script>
+</body>
+</html>

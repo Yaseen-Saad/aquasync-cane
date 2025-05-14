@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - AquaSync Cane</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="settings-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <img src="sugarcane-icon.png" alt="AquaSync Cane Logo" class="logo-img">
+            <span>AquaSync Cane</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+            <li><a href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a></li>
+            <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+            <li><a href="manual.html"><i class="fas fa-book"></i> Manual</a></li>
+            <li><a href="settings.html" class="active"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </nav>
+
+    <main class="settings-main">
+        <div class="settings-container">
+            <!-- System Settings -->
+            <section class="settings-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-sliders-h"></i> System Settings</h2>
+                </div>
+                <div class="settings-grid">
+                    <!-- Notification Settings -->
+                    <div class="settings-card">
+                        <div class="settings-card-header">
+                            <h3>Notifications</h3>
+                            <label class="toggle-switch" for="notifications-toggle">
+                                <input type="checkbox" id="notifications-toggle" checked title="Toggle all notifications">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="settings-options">
+                            <div class="setting-item">
+                                <span>Alert Notifications</span>
+                                <label class="toggle-switch" for="alert-notifications">
+                                    <input type="checkbox" id="alert-notifications" checked title="Toggle alert notifications">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <span>Maintenance Reminders</span>
+                                <label class="toggle-switch" for="maintenance-reminders">
+                                    <input type="checkbox" id="maintenance-reminders" checked title="Toggle maintenance reminders">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <span>Performance Reports</span>
+                                <label class="toggle-switch" for="performance-reports">
+                                    <input type="checkbox" id="performance-reports" title="Toggle performance reports">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Display Settings -->
+                    <div class="settings-card">
+                        <div class="settings-card-header">
+                            <h3>Display</h3>
+                        </div>
+                        <div class="settings-options">
+                            <div class="setting-item">
+                                <span>Dark Mode</span>
+                                <label class="toggle-switch" for="dark-mode">
+                                    <input type="checkbox" id="dark-mode" title="Toggle dark mode">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <span>Compact View</span>
+                                <label class="toggle-switch" for="compact-view">
+                                    <input type="checkbox" id="compact-view" title="Toggle compact view">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <span>Chart Animations</span>
+                                <label class="toggle-switch" for="chart-animations">
+                                    <input type="checkbox" id="chart-animations" checked title="Toggle chart animations">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Control Parameters -->
+                    <div class="settings-card">
+                        <div class="settings-card-header">
+                            <h3>Control Parameters</h3>
+                        </div>
+                        <div class="settings-options">
+                            <div class="setting-item slider-setting">
+                                <label for="update-frequency">Update Frequency</label>
+                                <div class="slider-container">
+                                    <input type="range" id="update-frequency" class="modern-slider" min="1" max="60" value="5" title="Adjust update frequency">
+                                    <div class="value-display">5s</div>
+                                </div>
+                            </div>
+                            <div class="setting-item slider-setting">
+                                <label for="alert-threshold">Alert Threshold</label>
+                                <div class="slider-container">
+                                    <input type="range" id="alert-threshold" class="modern-slider" min="0" max="100" value="75" title="Adjust alert threshold">
+                                    <div class="value-display">75%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Maintenance -->
+                    <div class="settings-card">
+                        <div class="settings-card-header">
+                            <h3>System Maintenance</h3>
+                        </div>
+                        <div class="settings-options">
+                            <div class="setting-item">
+                                <span>Auto-Maintenance</span>
+                                <label class="toggle-switch" for="auto-maintenance">
+                                    <input type="checkbox" id="auto-maintenance" checked title="Toggle auto-maintenance">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label for="backup-frequency">Backup Frequency</label>
+                                <select id="backup-frequency" class="modern-select" title="Select backup frequency">
+                                    <option>Daily</option>
+                                    <option>Weekly</option>
+                                    <option>Monthly</option>
+                                </select>
+                            </div>
+                            <div class="maintenance-actions">
+                                <button class="btn btn-secondary">
+                                    <i class="fas fa-database"></i> Backup Now
+                                </button>
+                                <button class="btn btn-warning">
+                                    <i class="fas fa-sync"></i> Reset Settings
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Preferences -->
+            <section class="settings-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-user-cog"></i> User Preferences</h2>
+                </div>
+                <div class="settings-grid">
+                    <!-- Account Settings -->
+                    <div class="settings-card">
+                        <div class="settings-card-header">
+                            <h3>Account Settings</h3>
+                        </div>
+                        <div class="user-profile">
+                            <div class="profile-image">
+                                <img src="default-avatar.png" alt="User Profile">
+                                <button class="edit-profile-btn" title="Change profile picture">
+                                    <i class="fas fa-camera" aria-hidden="true"></i>
+                                    <span class="sr-only">Change profile picture</span>
+                                </button>
+                            </div>
+                            <div class="profile-info">
+                                <input type="text" class="modern-input" value="John Doe" placeholder="Name">
+                                <input type="email" class="modern-input" value="john@example.com" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Settings -->
+                    <div class="settings-card">
+                        <div class="settings-card-header">
+                            <h3>Security</h3>
+                        </div>
+                        <div class="settings-options">
+                            <div class="setting-item">
+                                <span>Two-Factor Auth</span>
+                                <label class="toggle-switch" for="two-factor-auth">
+                                    <input type="checkbox" id="two-factor-auth" title="Toggle two-factor authentication">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label for="session-timeout">Session Timeout</label>
+                                <select id="session-timeout" class="modern-select" title="Select session timeout duration">
+                                    <option>15 minutes</option>
+                                    <option>30 minutes</option>
+                                    <option>1 hour</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary full-width">
+                                <i class="fas fa-key"></i> Change Password
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="settings.js"></script>
+</body>
+</html> 

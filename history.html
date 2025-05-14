@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treatment History - AquaSync Cane</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="history-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-logo">
+            <img src="sugarcane-icon.png" alt="AquaSync Cane Logo" class="logo-img">
+            <span>AquaSync Cane</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="history.html" class="active"><i class="fas fa-history"></i> History</a></li>
+            <li><a href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a></li>
+            <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+            <li><a href="plant-monitoring.html"><i class="fas fa-seedling"></i> Plant Monitoring</a></li>
+            <li><a href="manual.html"><i class="fas fa-book"></i> Manual</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <h1>Treatment History</h1>
+            <p class="subtitle">Historical Data and Treatment Records</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="history-container">
+            <!-- Filters Section -->
+            <section class="filters-section">
+                <div class="filter-group">
+                    <label for="date-range">Date Range:</label>
+                    <select id="date-range">
+                        <option value="today">Today</option>
+                        <option value="week">Last Week</option>
+                        <option value="month">Last Month</option>
+                        <option value="year">Last Year</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="treatment-type">Treatment Type:</label>
+                    <select id="treatment-type">
+                        <option value="all">All Treatments</option>
+                        <option value="primary">Primary Treatment</option>
+                        <option value="chemical">Chemical Treatment</option>
+                        <option value="final">Final Treatment</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="status-filter">Status:</label>
+                    <select id="status-filter">
+                        <option value="all">All Status</option>
+                        <option value="success">Successful</option>
+                        <option value="warning">Warning</option>
+                        <option value="error">Error</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" onclick="applyFilters()">
+                    <i class="fas fa-filter"></i> Apply Filters
+                </button>
+            </section>
+
+            <!-- History Records -->
+            <section class="history-records">
+                <div class="section-header">
+                    <h2>Treatment Records</h2>
+                    <button class="btn btn-secondary" onclick="exportHistory()">
+                        <i class="fas fa-download"></i> Export Records
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>Date & Time</th>
+                                <th>Treatment Type</th>
+                                <th>Parameters</th>
+                                <th>Efficiency</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2024-03-15 14:30</td>
+                                <td>Primary Treatment</td>
+                                <td>
+                                    <div class="parameter-list">
+                                        <span>BOD: 92%</span>
+                                        <span>COD: 88%</span>
+                                        <span>TSS: 95%</span>
+                                    </div>
+                                </td>
+                                <td>92%</td>
+                                <td><span class="status-badge success">Successful</span></td>
+                                <td>
+                                    <button class="btn-icon" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon" title="Download Report">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2024-03-15 10:15</td>
+                                <td>Chemical Treatment</td>
+                                <td>
+                                    <div class="parameter-list">
+                                        <span>pH: 7.2</span>
+                                        <span>DO: 6.5 mg/L</span>
+                                        <span>Temp: 28°C</span>
+                                    </div>
+                                </td>
+                                <td>88%</td>
+                                <td><span class="status-badge warning">Warning</span></td>
+                                <td>
+                                    <button class="btn-icon" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon" title="Download Report">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <button class="btn btn-secondary" disabled>
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <span class="page-info">Page 1 of 5</span>
+                    <button class="btn btn-secondary">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section class="analytics-section">
+                <div class="section-header">
+                    <h2>Treatment Analytics</h2>
+                    <button class="btn btn-secondary" onclick="showAnalyticsHelp()">
+                        <i class="fas fa-question-circle"></i> Help
+                    </button>
+                </div>
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>Treatment Efficiency Trend</h3>
+                        <canvas id="efficiencyChart"></canvas>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Parameter Distribution</h3>
+                        <canvas id="parameterChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Analytics Help Modal -->
+    <div id="analyticsHelpModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Analytics Help</h2>
+            <div class="help-content">
+                <h3>Treatment Efficiency Trend</h3>
+                <p>This chart shows the historical trend of treatment efficiency over time. The green line represents the target efficiency, while the blue line shows actual performance.</p>
+                
+                <h3>Parameter Distribution</h3>
+                <p>This chart displays the distribution of key treatment parameters. Each segment represents a different parameter, and the size indicates its relative importance in the treatment process.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="history.js"></script>
+</body>
+</html> 
